@@ -40,3 +40,7 @@ def build_docs(build):
     return subprocess.call(
         ["make", "html"], cwd=os.path.join(build.root, "docs")
     )
+
+
+def dev(build):
+    build.packages.install("japronto")
