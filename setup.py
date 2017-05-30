@@ -6,7 +6,9 @@ base = os.path.dirname(os.path.abspath(__file__))
 
 README_PATH = os.path.join(base, "README.rst")
 
-install_requires = []
+install_requires = [
+    'transmute-core>=0.4',
+]
 
 tests_require = []
 

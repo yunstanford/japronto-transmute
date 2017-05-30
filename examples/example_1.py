@@ -9,6 +9,9 @@ def hello(request):
     		"content": request.body,
     		"match-dict": request.match_dict,
     		"form": request.form,
+    		"query": request.query,
+    		# "keys": request.GET,
+    		"headers": request.headers,
     	}
     )
 

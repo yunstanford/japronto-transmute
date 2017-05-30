@@ -29,7 +29,7 @@ def create_handler(transmute_func, context):
 
 
 async def extract_params(request, context, transmute_func):
-    body = await request.content.read()
+    body = request.body
     content_type = request.mime_type
     extractor = ParamExtractorJapronto(request, body)
     return extractor.extract_params(
@@ -51,15 +51,15 @@ class ParamExtractorJapronto(ParamExtractor):
         return self._body
 
     def _query_argument(self, key, is_list):
-        if key not in self._request.GET:
+        if key not in self._request.query:
             return NoArgument
         if is_list:
-            return self._request.GET.getall(key)
+            return self._request.query[key]
         else:
-            return self._request.GET[key]
+            return self._request.query[key]
 
     def _header_argument(self, key):
         return self._request.headers.get(key, NoArgument)
 
     def _path_argument(self, key):
-        return self._request.match_info.get(key, NoArgument)
+        return self._request.match_dict.get(key, NoArgument)
